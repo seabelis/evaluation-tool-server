@@ -7,6 +7,7 @@ const port = 4000;
 const db = require("./db");
 const User = require("./user/model");
 const Batch = require("./batch/model")
+const Student = require("./student/model")
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
