@@ -3,10 +3,10 @@ const db = require("../db")
 
 const Batch = db.define("batch", {
   startDate: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
   },
   endDate: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
   }
 });
 
