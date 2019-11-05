@@ -14,3 +14,5 @@ const User = db.define("user", {
 });
 
 module.exports = User;
+
+// If this app were part of a larger system with other user types, a field for 'role' would be required for user-based permissions. 
