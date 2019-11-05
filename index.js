@@ -20,8 +20,8 @@ const batchRouter = require("./batch/router");
 const Student = require("./student/model");
 const studentRouter = require("./student/router");
 
-// const Evaluation = require("./evaluation/model");
-// const evaluationRouter = require("./evaluation/router");
+const Evaluation = require("./evaluation/model");
+const evaluationRouter = require("./evaluation/router");
 
 
 app
@@ -30,7 +30,7 @@ app
 .use(userRouter)
 .use(batchRouter)
 .use(studentRouter)
-// .use(evaluationRouter)
+.use(evaluationRouter)
 .listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 

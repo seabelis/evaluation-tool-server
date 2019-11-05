@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const Batch = require('./model');
-const Student = require('../batch/model')
+const Student = require('../student/model')
 
 const router = new Router();
 
