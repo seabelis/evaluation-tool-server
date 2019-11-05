@@ -6,12 +6,12 @@ const router = new Router();
 
 // Create student 
 router.post("/student", (req, res, next) => {
-  // console.log("WHAT IS REQ.BODY", req.body)
   Student.create(req.body)
     .then(student => res.json(student))
     .catch(next)
 });
 
+// Get all students
 router.get('/students', (req, res, next) => {
   Student.findAll()
     .then(students => {
@@ -20,6 +20,7 @@ router.get('/students', (req, res, next) => {
     .catch(next);
 });
 
+// Get specific student by id
 router.get('/students/:id', (req, res, next) => {
   Student.findByPk(req.params.id, { include: [ Batch ] })
     .then(student => {
@@ -28,14 +29,10 @@ router.get('/students/:id', (req, res, next) => {
     .catch(next);
 });
 
-
-
+// Update existing student
 router.put("/students/:id", (req, res, next) => {
-  // res.send('oh hi')
-  // console.log(req.params, 'WRECKED BY PARAMS??')
   Student.findByPk(req.params.id)
     .then(student => {
-      // console.log("student FOUND?", student)
       if (student) {
         student
           .update(req.body)
