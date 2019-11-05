@@ -14,8 +14,8 @@ const corsMiddleware = cors();
 const User = require("./user/model");
 const userRouter = require("./user/router");
 
-// const Batch = require("./batch/model");
-// const batchRouter = require("./batch/router");
+const Batch = require("./batch/model");
+const batchRouter = require("./batch/router");
 
 const Student = require("./student/model");
 const studentRouter = require("./student/router");
@@ -28,7 +28,7 @@ app
 .use(corsMiddleware)
 .use(bodyParser.json())
 .use(userRouter)
-// .use(batchRouter)
+.use(batchRouter)
 .use(studentRouter)
 // .use(evaluationRouter)
 .listen(port, () => console.log(`Example app listening on port ${port}!`))
