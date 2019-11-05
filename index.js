@@ -11,6 +11,9 @@ const cors = require("cors");
 const corsMiddleware = cors();
 
 // Models and Routers
+
+const auth = require("./auth/router");
+
 const User = require("./user/model");
 const userRouter = require("./user/router");
 
@@ -32,8 +35,8 @@ app
   .use(evaluationRouter)
   .listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-// db.sync({ force: true })
-  db.sync()
+db.sync({ force: true })
+  // db.sync()
   .then(() => console.log("Database schema updated"))
   .then(() => {
     const users = [
