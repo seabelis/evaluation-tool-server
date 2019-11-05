@@ -25,15 +25,15 @@ router.get('/evaluations', (req, res, next) => {
 router.get('/evaluations/:id', (req, res, next) => {
   Evaluation.findByPk(req.params.id)
     .then(evaluations => {
-      res.send(evaluation);
+      res.send(evaluations);
     })
     .catch(next);
 });
 
 // Update existing evaluation
 router.put("/evaluations/:id", (req, res, next) => {
-  Evaluations.findByPk(req.params.id)
-    .then(evalutaion => {
+  Evaluation.findByPk(req.params.id)
+    .then(evaluation => {
       if (evaluation) {
         evaluation
           .update(req.body)
