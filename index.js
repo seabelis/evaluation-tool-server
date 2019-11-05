@@ -10,16 +10,27 @@ const bodyParser = require('body-parser')
 const cors = require("cors");
 const corsMiddleware = cors();
 
-// Models
+// Models and Routers
 const User = require("./user/model");
-const Batch = require("./batch/model");
-const Student = require("./student/model");
-const Evaluation = require("./evaluation/model");
-
-// Routers
 const userRouter = require("./user/router");
 
-app.use(corsMiddleware);
-app.use(bodyParser.json())
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-app.use(userRouter);
+// const Batch = require("./batch/model");
+// const batchRouter = require("./batch/router");
+
+const Student = require("./student/model");
+const studentRouter = require("./student/router");
+
+// const Evaluation = require("./evaluation/model");
+// const evaluationRouter = require("./evaluation/router");
+
+
+app
+.use(corsMiddleware)
+.use(bodyParser.json())
+.use(userRouter)
+// .use(batchRouter)
+.use(studentRouter)
+// .use(evaluationRouter)
+.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+
