@@ -3,16 +3,13 @@ const app = express();
 const port = 4000;
 const db = require("./db");
 
-// Body-Parser
 const bodyParser = require("body-parser");
-
-// Cors
 const cors = require("cors");
 const corsMiddleware = cors();
 
 // Models and Routers
 
-const auth = require("./auth/router");
+const authRouter = require("./auth/router");
 
 const User = require("./user/model");
 const userRouter = require("./user/router");
@@ -30,21 +27,19 @@ app
   .use(corsMiddleware)
   .use(bodyParser.json())
   .use(userRouter)
+  .use(authRouter)
   .use(batchRouter)
   .use(studentRouter)
   .use(evaluationRouter)
   .listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-db.sync({ force: true })
-  // db.sync()
+// db.sync({ force: true })
+  db.sync()
   .then(() => console.log("Database schema updated"))
   .then(() => {
     const users = [
       { email: "user1@email.com", password: "password" },
-      { email: "user2@email.com", password: "password" },
-      { email: "user3@email.com", password: "password" },
-      { email: "user4@email.com", password: "password" },
-      { email: "user5@email.com", password: "password" }
+      
     ];
 
     const userPromises = users.map(user => User.create(user));

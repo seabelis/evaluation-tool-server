@@ -1,18 +1,19 @@
-const { Router } = require('express');
-const Batch = require('./model');
-const Student = require('../student/model')
+const { Router } = require("express");
+const Batch = require("./model");
+const Student = require("../student/model");
+const auth = require("../auth/middleware");
 
 const router = new Router();
 
-// Create batch 
-router.post("/batch", (req, res, next) => {
+// Create batch
+router.post("/batch", auth, (req, res, next) => {
   Batch.create(req.body)
     .then(batch => res.json(batch))
-    .catch(next)
+    .catch(next);
 });
 
 // Get all batches
-router.get('/batches', (req, res, next) => {
+router.get("/batches", auth, (req, res, next) => {
   Batch.findAll()
     .then(batches => {
       res.send(batches);
@@ -21,7 +22,7 @@ router.get('/batches', (req, res, next) => {
 });
 
 // Get specific batch by id
-router.get('/batches/:id', (req, res, next) => {
+router.get("/batches/:id", auth, (req, res, next) => {
   Batch.findByPk(req.params.id)
     .then(batch => {
       res.send(batch);
@@ -30,13 +31,11 @@ router.get('/batches/:id', (req, res, next) => {
 });
 
 // Update existing batch
-router.put("/batches/:id", (req, res, next) => {
+router.put("/batches/:id", auth, (req, res, next) => {
   Batch.findByPk(req.params.id)
     .then(batch => {
       if (batch) {
-        batch
-          .update(req.body)
-          .then(batch => res.json(batch));
+        batch.update(req.body).then(batch => res.json(batch));
       } else {
         res.status(404).end();
       }

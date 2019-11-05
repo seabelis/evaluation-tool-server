@@ -2,7 +2,7 @@ const { Router } = require("express");
 const User = require("../user/model");
 const bcrypt = require("bcrypt");
 const { toData, toJWT } = require("../auth/jwt");
-const auth = require("../auth/authMiddleware")
+const auth = require("./middleware");
 
 router = new Router();
 
@@ -36,7 +36,7 @@ router.post("/login", (req, res) => {
           });
         } else {
           res.status(400).send({
-            message: "Username or password was incorrect."
+            message: "Username or password incorrect."
           });
         }
       })
