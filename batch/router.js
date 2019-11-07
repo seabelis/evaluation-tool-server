@@ -13,7 +13,9 @@ router.post("/batch", auth, (req, res, next) => {
 });
 
 // Get all batches
-router.get("/batches", auth, (req, res, next) => {
+// router.get("/batches", auth, (req, res, next) => {
+  router.get("/batches", (req, res, next) => {
+
   Batch.findAll()
     .then(batches => {
       res.send(batches);
@@ -22,7 +24,9 @@ router.get("/batches", auth, (req, res, next) => {
 });
 
 // Get specific batch by id
-router.get("/batches/:id", auth, (req, res, next) => {
+// router.get("/batches/:id", auth, (req, res, next) => {
+  router.get("/batches/:id", (req, res, next) => {
+
   Batch.findByPk(req.params.id)
     .then(batch => {
       res.send(batch);
@@ -43,4 +47,13 @@ router.put("/batches/:id", auth, (req, res, next) => {
     .catch(next);
 });
 
+// Get all batch's students
+router.get("/batches/:batchID/students", (req, res, next) => {
+  Student.findAll({ where: { batchID: req.params.batchID } })
+    .then(students => {
+      res.json(students);
+    })
+    .catch(next);
+});
+// Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTU3MzEzOTIzNSwiZXhwIjoxNTczNDk5MjM1fQ.1TbKoglSaPWziUjOjBiZvscPgxHMVEigQjyKps79dqY"
 module.exports = router;
