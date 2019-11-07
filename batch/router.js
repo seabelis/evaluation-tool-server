@@ -48,8 +48,8 @@ router.put("/batches/:id", auth, (req, res, next) => {
 });
 
 // Get all batch's students
-router.get("/batches/:batchID/students", (req, res, next) => {
-  Student.findAll({ where: { batchID: req.params.batchID } })
+router.get("/batches/:batchId/students", (req, res, next) => {
+  Student.findAll({ include: [Batch] },{ where: { batchId: req.params.batchId }} )
     .then(students => {
       res.json(students);
     })
