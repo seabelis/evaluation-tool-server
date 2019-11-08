@@ -14,7 +14,9 @@ router.post("/student", auth, (req, res, next) => {
 
 // Get all students
 router.get("/students", auth, (req, res, next) => {
-  Student.findAll()
+  // router.get("/students", (req, res, next) => {
+
+  Student.findAll({ include: [Batch] })
     .then(students => {
       res.send(students);
     })
