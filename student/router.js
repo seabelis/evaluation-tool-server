@@ -13,8 +13,8 @@ router.post("/student", auth, (req, res, next) => {
 });
 
 // Get all students
-// router.get("/students", auth, (req, res, next) => {
-  router.get("/students", (req, res, next) => {
+router.get("/students", auth, (req, res, next) => {
+  // router.get("/students", (req, res, next) => {
 
   Student.findAll({ include: [Batch] })
     .then(students => {
@@ -24,7 +24,7 @@ router.post("/student", auth, (req, res, next) => {
 });
 
 // Get specific student by id
-router.get("/students/:id", (req, res, next) => {
+router.get("/students/:id", auth, (req, res, next) => {
   Student.findByPk(req.params.id, { include: [Batch] })
     .then(student => {
       res.send(student);
