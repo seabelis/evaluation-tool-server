@@ -17,7 +17,7 @@ const Evaluation = db.define("evaluation", {
     type: Sequelize.TEXT
   }
 });
-Student.hasMany(Evaluation)
+// Student.hasMany(Evaluation)
 User.hasMany(Evaluation)
 
 module.exports = Evaluation;

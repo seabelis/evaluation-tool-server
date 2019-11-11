@@ -1,0 +1,6 @@
+select students.name, students."batchId", batches."batchNumber", evaluations.*
+FROM students
+join evaluations
+on evaluations."studentId" = students.id
+join batches
+on batches.id = students."batchId"

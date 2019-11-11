@@ -2,6 +2,7 @@ const { Router } = require("express");
 const Evaluation = require("./model");
 const Batch = require("../batch/model");
 const Student = require("../student/model");
+const User = require('../user/model')
 
 const router = new Router();
 
@@ -14,12 +15,17 @@ router.post("/evaluation", (req, res, next) => {
 
 // Get all evaluations
 router.get("/evaluations", (req, res, next) => {
-  Evaluation.findAll()
+  Evaluation.findAll(    
+    {
+      include: [{all: true}]
+    }
+    )
     .then(evaluations => {
       res.send(evaluations);
     })
     .catch(next);
 });
+
 
 // Get specific evaluation by id
 router.get("/evaluations/:id", (req, res, next) => {
@@ -42,5 +48,7 @@ router.put("/evaluations/:id", (req, res, next) => {
     })
     .catch(next);
 });
+
+
 
 module.exports = router;

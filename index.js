@@ -33,8 +33,8 @@ app
   .use(evaluationRouter)
   .listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-// db.sync({ force: true })
-  db.sync()
+db.sync({ force: true })
+  // db.sync()
   .then(() => console.log("Database schema updated"))
   .then(() => {
     const users = [
@@ -111,12 +111,7 @@ app
           "https://vignette.wikia.nocookie.net/harrypotter/images/8/8e/LavenderBrown_WB_F6_LavenderCrying_Promo_080615_Port.jpg",
         batchId: 2
       },
-      {
-        name: "Alecto Carrow",
-        photo:
-          "https://scontent.fams1-1.fna.fbcdn.net/v/t31.0-8/19956660_1449573398431243_1151106133247597183_o.jpg",
-        batchId: 2
-      },
+      
       {
         name: "Amycus Carrow",
         photo:
@@ -182,4 +177,23 @@ app
     const studentPromises = students.map(student => Student.create(student));
     return Promise.all(studentPromises);
   })
+
+  .then(() => {
+    const evaluations = [
+      { grade: 'green', lessonDate: "2019-01-01", remarks: "bla bla bla", studentId: 1, userId: 1 },
+      { grade: 'yellow', lessonDate: "2019-01-01", remarks: "bla bla bla", studentId: 2, userId: 1 },
+      { grade: 'red', lessonDate: "2019-01-01", remarks: "bla bla bla", studentId: 3, userId: 1 },
+      { grade: 'green', lessonDate: "2019-01-01", remarks: "bla bla bla", studentId: 4, userId: 1 },
+      { grade: 'green', lessonDate: "2019-01-01", remarks: "bla bla bla", studentId: 1, userId: 1 },
+      { grade: 'yellow', lessonDate: "2019-01-01", remarks: "bla bla bla", studentId: 2, userId: 1 },
+      { grade: 'red', lessonDate: "2019-01-01", remarks: "bla bla bla", studentId: 3, userId: 1 },
+      { grade: 'green', lessonDate: "2019-01-01", remarks: "bla bla bla", studentId: 4, userId: 1 }
+
+    ];
+
+    const evaluationPromises = evaluations.map(evaluation => Evaluation.create(evaluation));
+    return Promise.all(evaluationPromises);
+  })
   .catch(console.error);
+
+  
